@@ -55,6 +55,7 @@ Example:
 
 # Contributing
 
+```
 1] ballerina.conf   - user will specify which OCI resource will be used for HOST
 2] constants.bal    - create a final string that references OCI resource's from API website
 3] test.bal         - follow test format above to test all base HTTP REST calls 
@@ -62,7 +63,8 @@ Example:
 5] utils.bal        - write a createOci<RESOURCE> method for non-null Oci object
 6] datamappings.bal - follow method formats to create empty oci resource object, use convert() function from json to Oci resource object
 7] endpoint.bal     - create oci client method and utilize utils HTTP API call methods for ociGet/Put/Post/DELETE requests
-8] Add copyright to top of every file. Example below. Add year as comma separated values.    
+8] Add copyright to top of every file. Example below. Add year as comma separated values.   
+``` 
 
 ```
 //
