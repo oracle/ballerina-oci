@@ -17,9 +17,7 @@
 //
 
 import ballerina/config;
-
 import ballerina/test;
-
 import ballerina/io;
 import ballerina/http;
  
@@ -32,8 +30,8 @@ string pathToKey = config:getAsString("PATHTOKEY");
 string keyStorePassword = config:getAsString("KEYSTOREPASSWORD"); 
 string keyAlias = config:getAsString("KEYALIAS"); 
 string keyPassword = config:getAsString("KEYPASSWORD"); 
- 
- json chunking = "{ chunking: http:CHUNKING_NEVER}";
+json chunking = "{ chunking: http:CHUNKING_NEVER}";
+
 // oci client endpoint
 OciConfiguration ociConfig = {
     host: host,
@@ -44,8 +42,6 @@ OciConfiguration ociConfig = {
     keyStorePassword: keyStorePassword,
     keyAlias: keyAlias,
     keyPassword: keyPassword
-    //,
- //   http1Settings : chunking.toJsonString()
 };
  
 Client ociClient = new(ociConfig);
@@ -59,18 +55,14 @@ http:ClientHttp1Settings chunk = {
 # Example: ballerina test --config ballerina.conf --groups bucket-list
 
 // Bucket and Object test variables
-string compartmentId = "ocid1.compartment.oc1..aaaaaaaa2wxjgkbc2dz7ro4gb67ha3evy6uaujl4h66kms7edxvkk224bgla";
-//string compartmentId = "ocid1.compartment.oc1..aaaaaaaaxqmkjz24rtucgwl5msat3vz63gx7l6l6ewnsoep5xlfpmfhscj7a";
-string tenancy = "orasenatdecanational01";
-//string tenancy = "orasenatdhubsred01";
-//string bucketName = "BucketCreatedViaBallerina";
-string bucketName = "newBallerinaBucket";
+string compartmentId = "";
+string tenancy = "";
+string bucketName = "";
+string path = "";
+string objectName = "";
+string fileName = "";
+string createdBy = "";
 
-string path = ".";
-//string objectName = "blank.txt";
-//string objectName = "README1.md";
-string objectName = "Eloqua.mov";
-string fileName = "citiBankDemo2.mov";
 
 // Buckets tests
 
@@ -94,14 +86,10 @@ string fileName = "citiBankDemo2.mov";
 function testcreateBucket() {
 
     io:println("ociClient -> createBucket()");
-    // json jsonBody = {
-    //     "compartmentId" : compartmentId,
-    //     "name": bucketName
-    // };
      json jsonBody = {
         "compartmentId" : compartmentId,
         "name": bucketName,
-        "freeformTags": {"Createdby": "ocid1.saml2idp.oc1..aaaaaaaait222pv4rwqmw5ktuebwhmiabz4z7wni6r6b4v5vgtcveyawwpgq/jadd.jennings@oracle.com"}
+        "freeformTags": {"Createdby": createdBy}
     };
     ociClient->createObjectStorageBucket(compartmentId, tenancy, jsonBody);
 }
@@ -114,7 +102,7 @@ function testcreateBucket() {
  }
 function testgetBucket() {
     io:println("ociClient -> getBucket()");
-    ociClient->getObjectStorageBucket(compartmentId, tenancy, "bucketballerina");
+    ociClient->getObjectStorageBucket(compartmentId, tenancy, bucketName);
 }
  
 # Given: compartmentId, tenancy, bucket name
@@ -139,7 +127,7 @@ function testdeleteBucket() {
  }
 function testlistObjects() {
     io:println("ociClient -> List object storage objects");
-    ociClient->listObjectStorageObjects(tenancy, "newBallerinaBucket"); 
+    ociClient->listObjectStorageObjects(tenancy, ""); 
 }
 
 
@@ -162,8 +150,7 @@ function  testdeleteObject() {
  }
 function testcreateObject() {
     io:println("ociClient -> createObject");     
-    var objectStorageObject = ociClient->createObjectStorageObject(tenancy, "newBallerinaBucket", objectName, path);
-   // _ = ociClient->createObjectStorageObject(tenancy, "bucketballerina", objectName, path);
+    var objectStorageObject = ociClient->createObjectStorageObject(tenancy, "", objectName, path);
      io:println(objectStorageObject.toString());
 }
 
@@ -175,5 +162,5 @@ function testcreateObject() {
  }
 function  testgetObject() {
     io:println("ociClient -> getObject");
-    error? objectStorageObject = ociClient->getObjectStorageObject(tenancy, bucketName, objectName, "downloaded" + objectName);
+    error? objectStorageObject = ociClient->getObjectStorageObject(tenancy, bucketName, objectName, "" + objectName);
 }

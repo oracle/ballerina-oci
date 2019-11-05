@@ -19,13 +19,8 @@
 import ballerina/http;
 import ballerina/io;
 import ballerina/time;
-//import ballerina/encoding;
-// import ballerina/system;
 import ballerina/crypto;
-// import ballerina/file;
 import ballerina/log;
-//import ballerina/mime;
-//testing out base 8
 import ballerina/lang.'array as arrays;
 
 public function generateSignature (http:Request request, string httpMethod, string tenancyId, string authUserId,
@@ -66,10 +61,6 @@ public function generateSignature (http:Request request, string httpMethod, stri
 
         byte[] contentSha256Byte = crypto:hashSha256(bodyArr);
         string contentSha256 = arrays:toBase64(contentSha256Byte);
-        //string contentSha256 = encoding:encodeBase64Url(contentSha256Byte);
-        //string contentSha256 = check encoding:encodeUriComponent(contentSha256Byte, "UTF-8");
-       
-       // io:println("HCcontentSha256Byte" + contentSha256Byte.toString() + "\nHCcontentSha256Byte" + "\nHCcontentSha256" + contentSha256 + "HCcontentSha256");
   
         request.setHeader(CONTENT_LENGTH, contentLength.toString());
         request.setHeader(CONTENT_TYPE, APPLICATION_JSON);
@@ -89,7 +80,6 @@ public function generateSignature (http:Request request, string httpMethod, stri
         byte[] signingArray = signingString.toBytes();
         byte[] signatureArray = check crypto:signRsaSha256(signingArray, privateKey);
         string signature = arrays:toBase64(signatureArray);
-        //string signature = encoding:encodeBase64Url(signatureArray);
  
         // Create Authorization Header
         string authHeader;
@@ -97,7 +87,6 @@ public function generateSignature (http:Request request, string httpMethod, stri
         authHeader = authHeader + "," + HEADERS + "=" + "\"" + DATE + " (" + REQUEST_TARGET +  ") " + HOST;
         if (httpMethodLower == PUT || httpMethodLower == POST) {
             authHeader = authHeader + " " + CONTENT_LENGTH + " " + CONTENT_TYPE + " " + X_CONTENT_SHA256;
-          //   io:println("<<<>>>>\n" + authHeader + "\n" + signingString + "\n<<<>>>>");
 
         }
         authHeader = authHeader + "\"";
@@ -105,8 +94,6 @@ public function generateSignature (http:Request request, string httpMethod, stri
         authHeader = authHeader + "," + ALGORITHM + "=" + "\"" + RSA_SHA256 + "\"";
         authHeader = authHeader + "," + SIGNATURE + "=" + "\"" + signature + "\"";
         request.setHeader(AUTHORIZATION, authHeader);
-        // io:println("******\n" + authHeader + "\n******");
-
     }
 }
 
@@ -141,22 +128,17 @@ public function generateSignatureReadableByteChannel (http:Request request, stri
       
         byte[]|error? body = copyToByte(jsonBody, pContentLength);
         int contentLength = pContentLength;
-        //int contentLength = 1599;
       
         if(body is  byte[]) {
             contentLength = body.length();
-            //contentLength = 1599;
             byte[] contentSha256Byte = crypto:hashSha256(body);
             io:println(contentLength);
-            // io:println("contentSha256Byte\n" + contentSha256Byte + "\contentSha256Byte");
             string contentSha256 = arrays:toBase64(contentSha256Byte);
         
             io:println("contentSha256\n" + contentSha256 + "\ncontentSha256");
             request.setHeader(CONTENT_LENGTH, contentLength.toString());
             request.setHeader(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
             request.setHeader(X_CONTENT_SHA256, contentSha256);
-           // request.setBinaryPayload(<@untainted> body,
-           //                             contentType = mime:APPLICATION_OCTET_STREAM);
             signingString = signingString + "\n";
             signingString = signingString + CONTENT_LENGTH + ": " + contentLength.toString() + "\n";
             signingString = signingString + CONTENT_TYPE + ": " + APPLICATION_OCTET_STREAM + "\n";
@@ -172,7 +154,6 @@ public function generateSignatureReadableByteChannel (http:Request request, stri
     
         byte[] signingArray = signingString.toBytes();
         byte[] signatureArray = check crypto:signRsaSha256(signingArray, privateKey);
-        // string signature = encoding:encodeBase64(signatureArray);
         string signature = arrays:toBase64(signatureArray);
  
         // Create Authorization Header
@@ -181,14 +162,12 @@ public function generateSignatureReadableByteChannel (http:Request request, stri
         authHeader = authHeader + "," + HEADERS + "=" + "\"" + DATE + " (" + REQUEST_TARGET +  ") " + HOST;
         if (httpMethodLower == PUT || httpMethodLower == POST) {
             authHeader = authHeader + " " + CONTENT_LENGTH + " " + CONTENT_TYPE + " " + X_CONTENT_SHA256;
-            // io:println("<<<>>>>\n" + authHeader + "\n" + signingString + "\n<<<>>>>");
         }
         authHeader = authHeader + "\"";
         authHeader = authHeader + "," + KEY_ID + "=" + "\"" + apiKeyId + "\"";
         authHeader = authHeader + "," + ALGORITHM + "=" + "\"" + RSA_SHA256 + "\"";
         authHeader = authHeader + "," + SIGNATURE + "=" + "\"" + signature + "\"";
         request.setHeader(AUTHORIZATION, authHeader);
-        // io:println("******\n" + authHeader + "\n******");
     }
 }
  
@@ -213,9 +192,7 @@ function copyToByte(io:ReadableByteChannel src,  int pContentLength) returns  by
     int readCount = 1;
     int contentLength = 0;
     byte[] ret=[];
-    while (true) {
-        // io:println("copyToByteRead");
-    
+    while (true) {    
         byte[]|io:Error result =  src.read(pContentLength + 1024);
         if (result is io:EofError) {
             break;
@@ -230,9 +207,6 @@ function copyToByte(io:ReadableByteChannel src,  int pContentLength) returns  by
 }
 
 
-
-
-
 function setError(http:Response res, error err) {
     res.statusCode = 500;
     res.setPayload(<@untainted> <string> err.detail()?.message);
@@ -245,14 +219,11 @@ function copy(io:ReadableByteChannel src, io:WritableByteChannel dst) returns er
     while (true) {
         byte[]|io:Error result =  src.read(100000);
         if (result is io:EofError) {
-         //   io:println("break");
             break;
         } else if (result is error) {
-         //   io:println("return");
             return <@untained> result;
         } else {
             mergedContent = merge(result,mergedContent);
-            //io:println("readContent");
         }
     }
     io:println("After Break");
@@ -268,12 +239,16 @@ function copy(io:ReadableByteChannel src, io:WritableByteChannel dst) returns er
     }
     return;
 }
+
+
 function merge(byte[] src, byte[] dest) returns byte[] {
       foreach int i in 0 ..< src.length() {
             dest[dest.length()] = src[i];
       }
    return <@untained> dest;
 }
+
+
 function close(io:ReadableByteChannel|io:WritableByteChannel ch) {
     abstract object {
         public function close() returns error?;

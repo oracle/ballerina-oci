@@ -44,10 +44,7 @@ public type Client client object{
         io:println("Init client");
         self.ociConfig = ociConfig;
         string endpointUrl = "https://" + self.ociConfig.host;
-      //  self.clientEndpoint = new(endpointUrl, config = ociConfig.clientConfig);
-      //  self.clientEndpoint = new(endpointUrl, ociConfig.clientConfig);
         self.clientEndpoint = new(endpointUrl, { http1Settings : { chunking: http:CHUNKING_NEVER }});
-        //io:println(self.clientEndpoint.config.get("chunking"));
         io:println(self.clientEndpoint.config.toString());
     }
 
@@ -72,10 +69,6 @@ public remote function createObjectStorageBucket(string compartmentId, string te
     var signature = generateSignature(request, httpMethod, self.ociConfig.tenancyId,
                     self.ociConfig.authUserId, self.ociConfig.keyFingerprint, self.ociConfig.pathToKey, self.ociConfig.keyStorePassword,
                     self.ociConfig.keyAlias, self.ociConfig.keyPassword, jsonPayload, self.ociConfig.host, reqTarget);
-    // io:println(canonicalQueryString);
-    // io:println("request");
-    // io:println(request.getTextPayload());
-    // io:println("request");
     var response = self.clientEndpoint->post(canonicalQueryString, request);
     if (response is http:Response) {
         io:println("POST request:");
@@ -215,8 +208,6 @@ public remote function createObjectStorageObject(string tenancy, string bucketNa
         var signature = generateSignatureReadableByteChannel(request, httpMethod, self.ociConfig.tenancyId,
                             self.ociConfig.authUserId, self.ociConfig.keyFingerprint, self.ociConfig.pathToKey, self.ociConfig.keyStorePassword,
                             self.ociConfig.keyAlias, self.ociConfig.keyPassword, src, contentLength, self.ociConfig.host, reqTarget);
-       // io:println(self.clientEndpoint.config.toString() );                    
-       // io:println(request.getHeader("Content-Length"));   
         request.setFileAsPayload(path + "/" + objectName, contentType = mime:APPLICATION_OCTET_STREAM);               
         var response = self.clientEndpoint->put(canonicalQueryString, request);
         if (response is http:Response) {
