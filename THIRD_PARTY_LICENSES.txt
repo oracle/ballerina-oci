@@ -1,0 +1,3 @@
+To run these modules, you need to download Ballerina from https://ballerina.io/. 
+For license information about distribution of Ballerina code, refer https://github.com/ballerina-platform/ballerina-lang and/or 
+https://ballerina.io/.

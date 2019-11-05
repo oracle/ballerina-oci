@@ -1,0 +1,7 @@
+[project]
+org-name = "oracle"
+version = "0.1.0"
+license= ["Apache-2.0"]
+authors = ["oracle"]
+keywords = ["oci", "core", "iam", "objectstorage", "oracle"]
+repository = "https://github.com/oracle/ballerina-oci"
