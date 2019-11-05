@@ -32,7 +32,8 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 
 Core, IAM, Objectstorage modules have not been pushed to the Ballerina Central as of now. Thus, in order to use these in your project, add the below dependency in your Ballerina.toml file.
 
-```[dependencies]
+```
+[dependencies]
 "oracle/core" = { path = "https://github.com/oracle/ballerina-oci/target/core-2019r3-any-0.1.0.balo", version = "0.1.0"}
 "oracle/iam" = { path = "https://github.com/oracle/ballerina-oci/target/iam-2019r3-any-0.1.0.balo", version = "0.1.0"}
 "oracle/core" = { path = "https://github.com/oracle/ballerina-oci/target/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
