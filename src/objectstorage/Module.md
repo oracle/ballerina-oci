@@ -19,6 +19,7 @@ The `oracle/objectstorage` module contains operations that work with Buckets. Yo
 The `oracle/objectstorage` module contains operations that work with Objects. You can create, delete, get, list.
 
 ## Compatibility
+```
 |-------------------------------|----------------|
 |                               |    Version     |
 |-------------------------------|----------------|
@@ -27,6 +28,7 @@ The `oracle/objectstorage` module contains operations that work with Objects. Yo
 | Oracle Object Storage Service |                |
 | API                           |   20160918     |
 |-------------------------------|----------------|
+```
 
 ## Running Sample
 

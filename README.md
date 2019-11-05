@@ -4,6 +4,7 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 
 
 ## Compatibility
+```
 |-------------------------------|----------------|
 |                               |    Version     |
 |-------------------------------|----------------|
@@ -17,6 +18,7 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 | Oracle Object Storage Service |                |
 | API                           |   20160918     |
 |-------------------------------|----------------|
+```
 
 
 
@@ -42,7 +44,8 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
 
 **Building the source**
 1. Clone this repository using the following command:
-```shell
+
+    ```shell
     $ git clone https://github.com/oracle/ballerina-oci.git
     ```
 

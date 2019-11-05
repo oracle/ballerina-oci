@@ -49,6 +49,7 @@ The `oracle/core` module contains operations that work with Security Lists. You 
 The `oracle/core` module contains operations that work with Subnet. You can get, list, delete, update, create.
 
 ## Compatibility
+```
 |-------------------------------|----------------|
 |                               |    Version     |
 |-------------------------------|----------------|
@@ -56,6 +57,7 @@ The `oracle/core` module contains operations that work with Subnet. You can get,
 |-------------------------------|----------------|
 | Oracle Core Services API      |   20160918     |
 |-------------------------------|----------------|
+```
 
 ## Running Sample
 

@@ -27,25 +27,29 @@ The requirements are to be test driven. Follow the Gherkin format to define a te
 
 # Endpoints
 
+```
 Given: OCID and settings variable(s)
 When:  API call method
-Then:  Code response and returned variable.
+Then:  Code response and returned variable
+```
 
 # Tests 
 
 Use same format and include an assert statement.
 
+```
 Given:  Test variable(s) defined in method or globally
 When:   Endpoint method being test
 Then:   Returned variable or response
 Assert: Compare resulting variable with test variable or response with test response
+```
 
 Use test config identifier: <API_MODULE>-<API_CALL>
 
 Example:
-@test:Config{
+```@test:Config{
     groups: ["instances-list"]
-}
+}```
 
 # Contributing
 
