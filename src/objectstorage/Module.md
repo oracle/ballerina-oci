@@ -37,7 +37,7 @@ Let's get started with a simple program in Ballerina to get a bucket.
 Add the below dependency in your Ballerina.toml file.
 
 ```[dependencies]
-"oracle/core" = { path = "https://github.com/oracle/ballerina-oci/target/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
+"oracle/objectstorage" = { path = "https://github.com/oracle/ballerina-oci/target/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
 ```
 
 You can use the `oracle/objectstorage` module to integrate with Oracle Object Storage Services. Import the `oracle/objectstorage` module into the Ballerina project.

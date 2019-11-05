@@ -15,6 +15,7 @@ Support for Ballerina 1.0.1
 Module Core
 - Support for Core services
     
+```
     Instance
         - GetInstance
         - InstanceAction
@@ -75,11 +76,12 @@ Module Core
         - GetSubnet
         - ListSubnet
         - UpdateSubnet
-
+```
 
 Module IAM
 - Support for Identity and Access Management services
     
+```
     User
         - CreateUser
         - DeleteUser
@@ -100,11 +102,12 @@ Module IAM
         - GetCompartment
         - ListCompartment
         - UpdateCompartment
-
+```
 
 Module Object Storage
 - Support for Object Storage services
 
+```
     Bucket
         - CreateBucket
         - DeleteBucket
@@ -116,3 +119,4 @@ Module Object Storage
         - DeleteObject
         - GetObject
         - ListObject
+```
