@@ -17,7 +17,7 @@ This can be automatically added to pull requests by committing with:
 
 ```
 git commit --signoff
-````
+```
 
 Only pull requests from committers that can be verified as having
 signed the OCA can be accepted.
@@ -47,9 +47,11 @@ Assert: Compare resulting variable with test variable or response with test resp
 Use test config identifier: <API_MODULE>-<API_CALL>
 
 Example:
-```@test:Config{
+```
+@test:Config{
     groups: ["instances-list"]
-}```
+}
+```
 
 # Contributing
 
