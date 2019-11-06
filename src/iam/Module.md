@@ -113,6 +113,7 @@ Refer [Oracle Documentation](https://docs.cloud.oracle.com/iaas/Content/API/Conc
 
 # Ballerina Configuration File
 Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate value. Below is an example.
+
     ```
     HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)
     TENANCY_ID = "<TENANCY OCID>"
