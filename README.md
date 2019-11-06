@@ -35,7 +35,7 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 
 ## Prerequisites
 
-- Install the Ballerina version as mentioned above [Install Ballerina](https://ballerina.io/downloads/archived/)
+- [Install Ballerina](https://ballerina.io/downloads/archived/) version as mentioned above
 - Create an [Oracle Cloud account](https://myservices.us.oraclecloud.com/mycloud/signup?sourceType=_ref_coc-asset-opcSignIn&language=en)
 
 
@@ -105,6 +105,7 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
 ### Working with Oracle OCI Connector
 
 1] Create PEM key with password
+
 ```openssl genrsa -out ~/.oci/oci_api_key.pem -aes128 2048```
 
 
@@ -112,6 +113,7 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
 
 
 3] Convert PEM to PKCS12 format
+
 ```openssl pkcs12 -export -nocerts -inkey ~/.oci/<KEY_NAME>.pem -in ~/.oci/<KEY_NAME>.pem -out ~/.oci/<KEY_NAME_P12>.p12 -name "<KEY_ALIAS>"```
 
 This converts the PEM to PKSC12 with the alias/name. It will prompt for the PEM password. It will prompt for a keystore password.
@@ -192,7 +194,7 @@ Copyright (c) 2019 Oracle and/or its affiliates. All rights reserved.
 
 This Connector and sample is licensed under Apache License 2.0.
 
-See [LICENSE](/LICENSE.txt) for more details.
+See [LICENSE](/LICENSE) for more details.
 
 
 ## Changes
