@@ -32,28 +32,11 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 </tbody>
 </table>
 
-```
-|-------------------------------|----------------|
-|                               |    Version     |
-|-------------------------------|----------------|
-| Ballerina Language            |     1.0.1      |
-|-------------------------------|----------------|
-| Oracle Core Services API      |   20160918     |
-|-------------------------------|----------------|
-| Oracle Identity and Access    |                | 
-| Management Service API        |   20160918     |
-|-------------------------------|----------------|
-| Oracle Object Storage Service |                |
-| API                           |   20160918     |
-|-------------------------------|----------------|
-```
-
-
 
 ## Prerequisites
 
-- Install Ballerina version as mentioned above - https://ballerina.io/downloads
-- Oracle Cloud account - https://myservices.us.oraclecloud.com/mycloud/signup?sourceType=_ref_coc-asset-opcSignIn&language=en
+- Install the Ballerina version as mentioned above [Install Ballerina](https://ballerina.io/downloads/archived/)
+- Create an [Oracle Cloud account](https://myservices.us.oraclecloud.com/mycloud/signup?sourceType=_ref_coc-asset-opcSignIn&language=en)
 
 
 ## Module Version Dependency
@@ -64,7 +47,7 @@ Core, IAM, Objectstorage modules have not been pushed to the Ballerina Central a
 [dependencies]
 "oracle/core" = { path = "https://github.com/oracle/ballerina-oci/target/core-2019r3-any-0.1.0.balo", version = "0.1.0"}
 "oracle/iam" = { path = "https://github.com/oracle/ballerina-oci/target/iam-2019r3-any-0.1.0.balo", version = "0.1.0"}
-"oracle/core" = { path = "https://github.com/oracle/ballerina-oci/target/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
+"oracle/objectstorage" = { path = "https://github.com/oracle/ballerina-oci/target/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
 ```
 
 
@@ -122,14 +105,14 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
 ### Working with Oracle OCI Connector
 
 1] Create PEM key with password
-openssl genrsa -out ~/.oci/oci_api_key.pem -aes128 2048
+```openssl genrsa -out ~/.oci/oci_api_key.pem -aes128 2048```
 
 
-2] Add the public key to your account and get the key fingerprint which will be required in configuration. Refer - https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#three
+2] Add the public key to your account and get the key fingerprint which will be required in configuration. [Refer the Oracle documentation](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#three)
 
 
 3] Convert PEM to PKCS12 format
-openssl pkcs12 -export -nocerts -inkey ~/.oci/<KEY_NAME>.pem -in ~/.oci/<KEY_NAME>.pem -out ~/.oci/<KEY_NAME_P12>.p12 -name "<KEY_ALIAS>"
+```openssl pkcs12 -export -nocerts -inkey ~/.oci/<KEY_NAME>.pem -in ~/.oci/<KEY_NAME>.pem -out ~/.oci/<KEY_NAME_P12>.p12 -name "<KEY_ALIAS>"```
 
 This converts the PEM to PKSC12 with the alias/name. It will prompt for the PEM password. It will prompt for a keystore password.
 
