@@ -91,10 +91,8 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
 3. Run tests :
 
     ```ballerina
-    ballerina init
-    ballerina test core
-    ballerina test iam
-    ballerina test objectstorage
+    $ ballerina init
+    $ ballerina test --all
     ```
 
 ## The following sections provide you with information on how to use the Ballerina Oracle OCI connector.
