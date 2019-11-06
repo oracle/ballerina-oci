@@ -45,9 +45,9 @@ Core, IAM, Objectstorage modules have not been pushed to the Ballerina Central a
 
 ```
 [dependencies]
-"oracle/core" = { path = "https://github.com/oracle/ballerina-oci/target/core-2019r3-any-0.1.0.balo", version = "0.1.0"}
-"oracle/iam" = { path = "https://github.com/oracle/ballerina-oci/target/iam-2019r3-any-0.1.0.balo", version = "0.1.0"}
-"oracle/objectstorage" = { path = "https://github.com/oracle/ballerina-oci/target/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
+"oracle/core" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/core-2019r3-any-0.1.0.balo", version = "0.1.0"}
+"oracle/iam" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/iam-2019r3-any-0.1.0.balo", version = "0.1.0"}
+"oracle/objectstorage" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
 ```
 
 
