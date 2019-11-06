@@ -139,13 +139,11 @@ Refer [Oracle Documentation](https://docs.cloud.oracle.com/iaas/Content/API/Conc
 # Ballerina Configuration File
 Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate value. Below is an example.
 
-    ```
-    HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)
-    TENANCY_ID = "<TENANCY OCID>"
-    AUTHUSER_ID = "<USER OCID>"
-    KEYFINGERPRINT = "<FINGERPRINT ADDED TO THE ABOVE USER>"
-    PATHTOKEY = "<PATH TO OCI KEY IN .P12 format>"
-    KEYSTOREPASSWORD = "<KEYSTORE PASSWORD>"
-    KEYALIAS = "<KEY ALIAS>"
-    KEYPASSWORD = "<KEY PASSWORD>"
-    ```
+```HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)```
+```TENANCY_ID = "<TENANCY OCID>"```
+```AUTHUSER_ID = "<USER OCID>"```
+```KEYFINGERPRINT = "<FINGERPRINT ADDED TO THE ABOVE USER>"```
+```PATHTOKEY = "<PATH TO OCI KEY IN .P12 format>"```
+```KEYSTOREPASSWORD = "<KEYSTORE PASSWORD>"```
+```KEYALIAS = "<KEY ALIAS>"```
+```KEYPASSWORD = "<KEY PASSWORD>"```
