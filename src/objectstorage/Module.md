@@ -55,10 +55,6 @@ Add the below dependency in your Ballerina.toml file.
 You can use the `oracle/objectstorage` module to integrate with Oracle Object Storage Services. Import the `oracle/objectstorage` module into the Ballerina project.
 
 ```ballerina
-import oracle/objectstorage;
-```
-
-```ballerina
 import ballerina/io;
 import oracle/objectstorage;
 
@@ -106,7 +102,7 @@ Refer [Oracle Documentation](https://docs.cloud.oracle.com/iaas/Content/API/Conc
 ```openssl pkcs12 -export -nocerts -inkey ~/.oci/<KEY_NAME>.pem -in ~/.oci/<KEY_NAME>.pem -out ~/.oci/<KEY_NAME_P12>.p12 -name "<KEY_ALIAS>"```
 
 # Ballerina Configuration File
-You can now enter the credentials in the Oracle core ballerina.conf file:
+Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate value. Below is an example.
 ```ballerina
 HOST_CORE="iaas.<REGION - e.g.us-ashburn-1>.oraclecloud.com"
 TENANCY_ID=""
