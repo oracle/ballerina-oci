@@ -112,13 +112,15 @@ Refer [Oracle Documentation](https://docs.cloud.oracle.com/iaas/Content/API/Conc
 ```openssl pkcs12 -export -nocerts -inkey ~/.oci/<KEY_NAME>.pem -in ~/.oci/<KEY_NAME>.pem -out ~/.oci/<KEY_NAME_P12>.p12 -name "<KEY_ALIAS>"```
 
 # Ballerina Configuration File
-Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate value. Below is an example.
+Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate values. Below is an example.
 
-```HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)```
-```TENANCY_ID = "<TENANCY OCID>"```
-```AUTHUSER_ID = "<USER OCID>"```
-```KEYFINGERPRINT = "<FINGERPRINT ADDED TO THE ABOVE USER>"```
-```PATHTOKEY = "<PATH TO OCI KEY IN .P12 format>"```
-```KEYSTOREPASSWORD = "<KEYSTORE PASSWORD>"```
-```KEYALIAS = "<KEY ALIAS>"```
-```KEYPASSWORD = "<KEY PASSWORD>"```
+    ```
+    HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)
+    TENANCY_ID = "<TENANCY OCID>"
+    AUTHUSER_ID = "<USER OCID>"
+    KEYFINGERPRINT = "<FINGERPRINT ADDED TO THE ABOVE USER>"
+    PATHTOKEY = "<PATH TO OCI KEY IN .P12 format>"
+    KEYSTOREPASSWORD = "<KEYSTORE PASSWORD>"
+    KEYALIAS = "<KEY ALIAS>"
+    KEYPASSWORD = "<KEY PASSWORD>"
+    ```

@@ -71,7 +71,7 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
 
 ## Running Tests
 
-1. Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate value. Below is an example.
+1. Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate values. Below is an example.
 
     ```
     HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)
