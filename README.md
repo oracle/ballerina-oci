@@ -61,7 +61,7 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
     $ git clone https://github.com/oracle/ballerina-oci.git
     ```
 
-2. Run below commands from the `ballerina-oci` root directory:
+2. Run below commands from the `ballerina-oci` root directory. For convenience, the below commands skip tests. However, for any change you make, make sure you run all tests so that the module is not broken.
 
     ```shell
     $ ballerina build -c --skip-tests --all

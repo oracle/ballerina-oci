@@ -18,8 +18,6 @@
 //
 
 import ballerina/config;
-//import ballerina/http;
-//import ballerina/log;
 import ballerina/test;
 import ballerina/io;
 import ballerina/runtime;
@@ -59,13 +57,12 @@ function delay(float minutes) {
     runtime:sleep(totalDelay);
 }
 
-//Users test variables
-//string compartmentId = "ocid1.tenancy.oc1..aaaaaaaasvq5kgrujit7sohgfbtkaexgi35auduftlaxol65resgapojzofa";
-string userDescription = "User created via ballerina";
-string userName = "Ballerina";
-string userId = "ocid1.user.oc1..aaaaaaaaq2bstu4yg3z6vjtl6ph7sk223kgx55zg6nxsfdlbgkfoeyz4vrya";
-string userDescriptionUpdate = "Description updated by ballerina";
 
+//Users test variables
+string userDescription = "";
+string userName = "";
+string userId = "";
+string userDescriptionUpdate = "";
 
 
 //Group
@@ -74,25 +71,22 @@ string userDescriptionUpdate = "Description updated by ballerina";
 # Example: ballerina test --config ballerina.conf --groups groups-list
  
 //Groups test variables
-string groupDisplayName = "BallerinaGroup";
-string groupDescription  = "Group created via ballerina";
-string groupDescriptionUpdate = "Description updated by ballerina";
-string groupId = "ocid1.group.oc1..aaaaaaaafpkd3wowr55m6geh6ikv3hlkxnl5erzhtcqfcgu2yob2ie6rufrq";
-
-
+string groupDisplayName = "";
+string groupDescription  = "";
+string groupDescriptionUpdate = "";
+string groupId = "";
 
 
 //Compartment
 # Terminal command to test:
 # ballerina test --config ballerina.conf --groups compartments-<GROUPS>
 # Example: ballerina test --config ballerina.conf --groups compartments-list
-string compartmentName = "Ballerina";
-string compartmentDescription = "test that can be deleted later";
-string compartmentUpdatedDescription = "updated via ballerina";
-string compartmentUpdatedName = "Ballerina_new";
-string compartmentId = "ocid1.compartment.oc1..aaaaaaaam2r7gxy4bvkf2ebt3y4hges4sjmihtqbkx43iqo4b2znvvzxioua";
-string compartmentLimit = "50";
-
+string compartmentName = "";
+string compartmentDescription = "";
+string compartmentUpdatedDescription = "";
+string compartmentUpdatedName = "";
+string compartmentId = "";
+string compartmentLimit = "";
 
 
 # Given: compartmentId and user requirements in jsonBody
@@ -145,7 +139,6 @@ function testGetUser() {
     test:assertEquals(user.id, userId, msg = "USER not found");
 }
 
-
 # Given: Dictionary query string of user compartmentId
 # When:  listUsers
 # Then:  Returns list of users from compartment
@@ -163,7 +156,6 @@ function testListUsers() {
         io:println("User Name: " + user.name);
         io:println("User Id: " + user.id);
     }
-    //test:assertEquals(exists, true , msg = "Cannot find user with name " + userName + " within list");
 }
 
 # Given: userId with userDescriptionUpdate in jsonBody
@@ -197,7 +189,6 @@ function testCreateGroups() {
         "name" : groupDisplayName, 
         "description": groupDescription
     };
-    //io:println("ociClient -> createGroup()");
     OciGroups groupi = ociClient->createGroups(jsonBody);
     io:println("Group " + groupi.name + " created with OCID--> " + groupi.id);
     test:assertEquals(groupDisplayName, groupi.name, msg = "GROUPS " + groupDisplayName + " not created.");
@@ -250,7 +241,6 @@ function testListGroups() {
         io:println("Group Name: " + groupi.name);
         io:println("Group Id: " + groupi.id);
     }
-    //test:assertEquals(exists, true, msg = "Cannot find Group with name " + groupDisplayName + " within list");
 }
 
 # Given: groupId 
@@ -270,9 +260,6 @@ function testUpdateGroup() {
     test:assertEquals(groupDescriptionUpdate, groupi.description, msg = "Group description not updated");
 }
 
-
-
-
 # Given: Dictionary query string of compartmentId
 # When: listCompartments
 # Then: Returns list of compartments from parent compartment
@@ -286,7 +273,6 @@ function testListCompartments() {
         "compartmentId" : compartmentId,
         "compartmentIdInSubtree" : "true",
         "limit": compartmentLimit
-
     };
     OciCompartment[] compartments = ociClient->listCompartments(queries);
     boolean exists = false;
@@ -296,7 +282,6 @@ function testListCompartments() {
             exists = true;
         }
     }
-    //test:assertEquals(exists, true, msg = "Cannot find compartment with name " + compartmentName + " within list");
 }
 
 @test:Config{

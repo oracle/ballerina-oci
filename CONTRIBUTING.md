@@ -25,6 +25,7 @@ signed the OCA can be accepted.
 
 The requirements are to be test driven. Follow the Gherkin format to define a test flow before writing any production code. This will improve readability and set expectations of what code will do.
 
+
 # Endpoints
 
 ```
@@ -32,6 +33,7 @@ Given: OCID and settings variable(s)
 When:  API call method
 Then:  Code response and returned variable
 ```
+
 
 # Tests 
 
@@ -52,6 +54,7 @@ Example:
     groups: ["instances-list"]
 }
 ```
+
 
 # Contributing
 
@@ -86,3 +89,12 @@ Example:
 //
 ```
 
+
+# Build, Compile, and Add .balo files
+
+As of now, we have not pushed this module to Ballerina Central. So in order for others to use this, we need to push the .balo files to the github repository. Build and compile the module as below and make sure you have the .balo files when you make a pull request. For convenience, the below commands skip tests. However, for any change you make, make sure you run all tests so that the module is not broken.
+
+ ```shell
+    $ ballerina build -c --skip-tests --all
+    $ ballerina compile --skip-tests
+```

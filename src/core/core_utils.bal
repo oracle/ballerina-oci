@@ -18,13 +18,11 @@
 
 import ballerina/encoding;
 import ballerina/http;
-import ballerina/io;
+// TODO: commenting the below for now till we fix the JSON conversion error
+// import ballerina/io;
 import ballerina/time;
-// import ballerina/system;
 import ballerina/crypto;
-// import ballerina/file;
 import ballerina/log;
-// import ballerina/mime;
 
 //testing out base 8
 import ballerina/lang.'array as arrays;
@@ -45,16 +43,15 @@ public function ociGetRequest(OciConfiguration ociConfig, http:Client ociClient,
 
     if(id == "") {
         canonicalQueryString += buildQueryString(queries);
-    }else{
+    } else {
         canonicalQueryString += id;
     }
-    //string canonicalQueryString = "/" + API_VERSION + "/" + ociResource + "/" + id;
+
     string reqTarget = GET + " " + canonicalQueryString;
     var signature = generateSignature(request, GET, ociConfig.tenancyId, ociConfig.authUserId,
     ociConfig.keyFingerprint, ociConfig.pathToKey, ociConfig.keyStorePassword,
     ociConfig.keyAlias, ociConfig.keyPassword, "", ociConfig.host, reqTarget);
     http:Response|error response = ociClient->get(canonicalQueryString, message = request);
-    //io:println(response);
     return getCleanedJSON(ociResource, GET, response);
 }
 
@@ -66,7 +63,7 @@ public function ociGetRequest(OciConfiguration ociConfig, http:Client ociClient,
 # When:  DELETE
 # Then:  Delete resource 
 public function ociDeleteRequest(OciConfiguration ociConfig, http:Client ociClient, 
-                                    string ociResource, string id) {  
+    string ociResource, string id) {  
     http:Request request = new;
     string canonicalQueryString = "/" + API_VERSION + "/" + ociResource + "/" + getEncodedString(id);
     string reqTarget = DELETE + " " + canonicalQueryString;
@@ -74,7 +71,6 @@ public function ociDeleteRequest(OciConfiguration ociConfig, http:Client ociClie
         ociConfig.keyFingerprint, ociConfig.pathToKey, ociConfig.keyStorePassword,
         ociConfig.keyAlias, ociConfig.keyPassword, "", ociConfig.host, reqTarget);
     var response = ociClient->delete(canonicalQueryString, request);
-    // return getCleanedJSON(ociResource, DELETE, response);
 }
 
 # Given
@@ -89,7 +85,7 @@ public function ociDeleteRequest(OciConfiguration ociConfig, http:Client ociClie
 # Then:  Return json response 
 # Possible bug - jsonBody gets "" as body
 public function ociPostRequest(OciConfiguration ociConfig, http:Client ociClient, 
-                    string ociResource, string id, string action, json jsonBody) returns json {
+    string ociResource, string id, string action, json jsonBody) returns json {
     http:Request request = new;
     string canonicalQueryString = "/" + API_VERSION + "/" + ociResource + "/";
 
@@ -118,16 +114,13 @@ public function ociPostRequest(OciConfiguration ociConfig, http:Client ociClient
 # Then:  Return json response 
 # Possible bug - jsonBody gets "" as body
 public function ociPutRequest(OciConfiguration ociConfig, http:Client ociClient, 
-                                    string ociResource, string id, json jsonBody) returns json {
+    string ociResource, string id, json jsonBody) returns json {
     http:Request request = new;
     string canonicalQueryString = "/" + API_VERSION + "/" + ociResource + "/" + getEncodedString(id);
     string reqTarget = PUT + " " + canonicalQueryString;
     var signature = generateSignature(request, PUT, ociConfig.tenancyId, ociConfig.authUserId,
         ociConfig.keyFingerprint, ociConfig.pathToKey, ociConfig.keyStorePassword,
         ociConfig.keyAlias, ociConfig.keyPassword, jsonBody, ociConfig.host, reqTarget);
-
-
-    // io:println(canonicalQueryString);
 
     var response = ociClient->put(canonicalQueryString, request);
     return getCleanedJSON(ociResource, PUT, response);
@@ -139,8 +132,6 @@ public function ociPutRequest(OciConfiguration ociConfig, http:Client ociClient,
 # When: PUT request
 # Then: Return encoded id or throw error
 public function getEncodedString(string id) returns string {
-    //var value = http:encode(id, UTF_8);
-    // var value = encoding:encodeUriComponent(id, UTF_8);
     var value = encoding:encodeUriComponent(id,UTF_8);
     if (value is string) {
         return value;
@@ -191,10 +182,8 @@ public function isMsgError(json msg) returns boolean {
 # When: getCleanedJSON() has error when retrieving json payload from http response
 # Then: print error message code and message
 public function printJsonError(string ociResource, string request, json msg) {
-    // io:println(msg["code"]);
-    // io:println(msg["message"]);
-    io:println(msg?.code);
-    io:println(msg?.message);
+    // io:println(msg?.code);
+    // io:println(msg?.message);
 }
 
 # Given
@@ -214,7 +203,6 @@ public function buildQueryString(map<string> queries) returns string {
 # When: string cannot be encoded, it throws error
 # Then: print error message code and message
 public function encodeString(string value) returns string {
-    // var encodedValue = http:encode(value, UTF-8);
     var encodedValue = encoding:encodeUriComponent(value, UTF_8);
     string encodedString;
     if (encodedValue is string) {
@@ -251,19 +239,17 @@ public function generateSignature(http:Request request, string httpMethod, strin
     signingString = signingString + "(" + REQUEST_TARGET + "): " + reqTarget + "\n";
     signingString = signingString + HOST + ": " + host ;
     string httpMethodLower = httpMethod.toLowerAscii();
-    if (httpMethodLower == PUT || httpMethodLower == POST) {
-        // string body = jsonBody.toString();     
+    if (httpMethodLower == PUT || httpMethodLower == POST) {   
 
         string body = jsonBody.toJsonString();
 
         if (body != "") {
             request.setPayload(jsonBody);
         }
-        // byte[] bodyArr = body.toByteArray(UTF_8);
+
         byte[] bodyArr = body.toBytes();    
         int contentLength = body.length();
         byte[] contentSha256Byte = crypto:hashSha256(bodyArr);
-        // string contentSha256 = encoding:encodeBase64(contentSha256Byte);
 
         string contentSha256 = arrays:toBase64(contentSha256Byte);
 
@@ -274,10 +260,6 @@ public function generateSignature(http:Request request, string httpMethod, strin
                         CONTENT_LENGTH + ": " + contentLength.toString() + "\n" + 
                         CONTENT_TYPE + ": " + APPLICATION_JSON + "\n" + 
                         X_CONTENT_SHA256 + ": " + contentSha256;
-
-        // io:println("Signing String");
-        // io:println(signingString);
-        // io:println();
     }
  
     // Get Private Key
@@ -285,12 +267,8 @@ public function generateSignature(http:Request request, string httpMethod, strin
     var privateKey = crypto:decodePrivateKey(keyStore, keyAlias, keyPassword);
     if (privateKey is crypto:PrivateKey) {
         // Encrypt signing string
-        // byte[] signingArray = signingString.toByteArray(UTF_8);
-
         byte[] signingArray = signingString.toBytes();
-
         byte[] signatureArray = check crypto:signRsaSha256(signingArray, privateKey);
-        // string signature = encoding:encodeBase64(signatureArray);
         string signature = arrays:toBase64(signatureArray);
  
         // Create Authorization Header

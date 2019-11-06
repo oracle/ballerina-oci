@@ -17,8 +17,6 @@
 //
 
 import ballerina/config;
-// import ballerina/http;
-// import ballerina/log;
 import ballerina/test;
 import ballerina/runtime;
 import ballerina/io;
@@ -59,14 +57,14 @@ function delay(float minutes) {
 }
 
 // Instances test variables
-string compartmentId = "ocid1.compartment.oc1..aaaaaaaabsv7hnaozvjazwtzbid6kt2nsimfisb5nmsyhurqsctq5ipiizja";
-string instanceDisplayName = "BallerinaTest1";
-string instanceDisplayNameUpdate = "BallerinaTestUpdate";
-string instanceId = "ocid1.instance.oc1.phx.anyhqljrytsgwayckfhavbszynjh6lmdcv75ofyfzpxn6a5oxle5ggrlec5q";
-string instanceAvailDomain = "UWQV:PHX-AD-2";
-string instanceShape = "VM.Standard2.1";
-string instanceImageId = "ocid1.image.oc1.phx.aaaaaaaa7nklq5tjkb76kcbkikfsc2erz7nsjejssynz3oo4zfuxmywwsdbq";
-string instanceSubnetId = "ocid1.subnet.oc1.phx.aaaaaaaaqa3wodl5xtedlvuqqvpyxpwrcrzbtge6vzf6ots5yxbwrfnduphq" ;
+string compartmentId = "";
+string instanceDisplayName = "";
+string instanceDisplayNameUpdate = "";
+string instanceId = "";
+string instanceAvailDomain = "";
+string instanceShape = "";
+string instanceImageId = "";
+string instanceSubnetId = "" ;
 
 
 // VCN test variables
