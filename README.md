@@ -4,6 +4,34 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 
 
 ## Compatibility
+
+<table>
+<thead>
+	<tr>
+		<th></th>
+		<th>Version</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Ballerina Language</td>
+		<td>1.0.1 </td>
+	</tr>
+	<tr>
+		<td>Oracle Core Services API</td>
+		<td>20160918</td>
+	</tr>
+    <tr>
+		<td>Oracle Identity and Access Management Service API</td>
+		<td>20160918</td>
+	</tr>
+    <tr>
+		<td>Oracle Object Storage Service API</td>
+		<td>20160918</td>
+	</tr>
+</tbody>
+</table>
+
 ```
 |-------------------------------|----------------|
 |                               |    Version     |
