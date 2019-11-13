@@ -49,7 +49,7 @@ Add the below dependency in your Ballerina.toml file.
 
 ```
 [dependencies]
-"oracle/objectstorage" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
+"oracle/objectstorage" = { path = "path-to-objectstorage.balo", version = "0.1.0"}
 ```
 
 You can use the `oracle/objectstorage` module to integrate with Oracle Object Storage Services. Import the `oracle/objectstorage` module into the Ballerina project.

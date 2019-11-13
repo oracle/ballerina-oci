@@ -39,7 +39,7 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 - Create an [Oracle Cloud account](https://myservices.us.oraclecloud.com/mycloud/signup?sourceType=_ref_coc-asset-opcSignIn&language=en)
 
 
-### Install from Source
+### Option 1: Install from Source
 
 **Building the source**
 1. Clone this repository using the following command:
@@ -56,6 +56,19 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
     ```
 
 3. Now that the .balo files are created, add the dependencies for the required .balo files in your Ballerina.toml file. This is required as Core, IAM, Objectstorage modules have not been pushed to the Ballerina Central as of now. Thus, in order to use these in your project, add the below dependencies in your Ballerina.toml file.
+
+```
+[dependencies]
+"oracle/core" = { path = "path-to-core.balo", version = "0.1.0"}
+"oracle/iam" = { path = "path-to-iam.balo", version = "0.1.0"}
+"oracle/objectstorage" = { path = "path-to-objectstorage.balo", version = "0.1.0"}
+```
+
+
+### Option 2: Specify the path for cloned or downloaded .balo files
+
+Clone or download this github repository - [ballerina-oci](https://github.com/oracle/ballerina-oci.git).
+Specify the path of the ".balo" files (found in the target folder) in the Ballerina.toml as below:
 
 ```
 [dependencies]

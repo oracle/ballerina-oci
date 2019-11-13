@@ -54,7 +54,7 @@ Add the below dependency in your Ballerina.toml file.
 
 ```
 [dependencies]
-"oracle/iam" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/iam-2019r3-any-0.1.0.balo", version = "0.1.0"}
+"oracle/iam" = { path = "path-to-iam.balo", version = "0.1.0"}
 ```
 
 You can use the `oracle/iam` module to integrate with Oracle IAM Services. Import the `oracle/iam` module into the Ballerina project.
