@@ -39,20 +39,7 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 - Create an [Oracle Cloud account](https://myservices.us.oraclecloud.com/mycloud/signup?sourceType=_ref_coc-asset-opcSignIn&language=en)
 
 
-## Module Version Dependency
-
-Core, IAM, Objectstorage modules have not been pushed to the Ballerina Central as of now. Thus, in order to use these in your project, add the below dependency in your Ballerina.toml file.
-
-```
-[dependencies]
-"oracle/core" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/core-2019r3-any-0.1.0.balo", version = "0.1.0"}
-"oracle/iam" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/iam-2019r3-any-0.1.0.balo", version = "0.1.0"}
-"oracle/objectstorage" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/objectstorage-2019r3-any-0.1.0.balo", version = "0.1.0"}
-```
-
-
 ### Install from Source
-Alternatively, you can install Oracle OCI connectors from the source using the following instructions.
 
 **Building the source**
 1. Clone this repository using the following command:
@@ -68,10 +55,21 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
     $ ballerina compile --skip-tests
     ```
 
+3. Now that the .balo files are created, add the dependencies for the required .balo files in your Ballerina.toml file. This is required as Core, IAM, Objectstorage modules have not been pushed to the Ballerina Central as of now. Thus, in order to use these in your project, add the below dependencies in your Ballerina.toml file.
+
+```
+[dependencies]
+"oracle/core" = { path = "path-to-core.balo", version = "0.1.0"}
+"oracle/iam" = { path = "path-to-iam.balo", version = "0.1.0"}
+"oracle/objectstorage" = { path = "path-to-objectstorage.balo", version = "0.1.0"}
+```
+
 
 ## Running Tests
 
-1. Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate values. Below is an example.
+If you want to run the tests from the ballerina-oci modules, follow the below steps. 
+
+1. Create or update `ballerina.conf` file in your project with following configurations and provide appropriate values. Below is an example.
 
     ```
     HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)
@@ -91,7 +89,6 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
 3. Run tests :
 
     ```ballerina
-    $ ballerina init
     $ ballerina test --all
     ```
 
@@ -117,57 +114,41 @@ Alternatively, you can install Oracle OCI connectors from the source using the f
 This converts the PEM to PKSC12 with the alias/name. It will prompt for the PEM password. It will prompt for a keystore password.
 
 
-4] After adding the dependency as mentioned above in the Ballerina.toml file, import the `oracle/core` module into the Ballerina project.
-
-```ballerina
-import oracle/core;
-```
-
-In order for you to use the Oracle OCI Connector, first you need to create a Oracle OCI Client endpoint.
-
-```ballerina
-oci:OciConfiguration ociConfig = {
-    host: "",
-    tenancyId: "",
-    authUserId: "",
-    keyFingerprint: "",
-    pathToKey: "",
-    keyStorePassword: "",
-    keyAlias: "",
-    keyPassword: ""
-};
-   
-oci:Client ociClient = new(ociConfig);
-```
+4] After adding the dependency as mentioned above in the Ballerina.toml file and also adding the details in ballerina.conf file, import the `oracle/core` module into the Ballerina project.
 
 ##### Sample
 
 ```ballerina
 import ballerina/io;
+import ballerina/config;
 import oracle/core;
 
-oci:OciConfiguration ociConfig = {
-    host: "",
-    tenancyId: "",
-    authUserId: "",
-    keyFingerprint: "",
-    pathToKey: "",
-    keyStorePassword: "",
-    keyAlias: "",
-    keyPassword: ""
+string host = config:getAsString("HOST_CORE");
+string tenancyId = config:getAsString("TENANCY_ID"); 
+string authUserId= config:getAsString("AUTHUSER_ID"); 
+string keyFingerprint = config:getAsString("KEYFINGERPRINT"); 
+string pathToKey = config:getAsString("PATHTOKEY"); 
+string keyStorePassword = config:getAsString("KEYSTOREPASSWORD"); 
+string keyAlias = config:getAsString("KEYALIAS"); 
+string keyPassword = config:getAsString("KEYPASSWORD"); 
+
+# OCI Client endpoint
+core: OciConfiguration ociConfig = {
+    host: host,
+    tenancyId: tenancyId,
+    authUserId: authUserId,
+    keyFingerprint: keyFingerprint,
+    pathToKey: pathToKey,
+    keyStorePassword: keyStorePassword,
+    keyAlias: keyAlias,
+    keyPassword: keyPassword
 };
    
-oci:Client ociClient = new(ociConfig);
+core:Client ociClient = new(ociConfig);
 
 public function main() {
-
-    var instanceResponse = ociClient->getInstance(<instance OCID>);
-    if (instance is OciInstance) {
-        io:println("Instance display name: ", instanceResponse.displayName);
-    } else {
-        io:println("Error: ", instanceResponse);
-    }
-    
+    var instanceResponse = ociClient->getInstance(<Instance OCID>);
+    io:println("Instance display name: ", instanceResponse.displayName);
 }
 ```
 

@@ -54,29 +54,45 @@ Add the below dependency in your Ballerina.toml file.
 
 You can use the `oracle/objectstorage` module to integrate with Oracle Object Storage Services. Import the `oracle/objectstorage` module into the Ballerina project.
 
+
 ```ballerina
 import ballerina/io;
+import ballerina/config;
 import oracle/objectstorage;
 
-objectstorage:OciConfiguration ociConfig = {
-    host: "",
-    tenancyId: "",
-    authUserId: "",
-    keyFingerprint: "",
-    pathToKey: "",
-    keyStorePassword: "",
-    keyAlias: "",
-    keyPassword: ""
+string host = config:getAsString("HOST_CORE");
+string tenancyId = config:getAsString("TENANCY_ID"); 
+string authUserId= config:getAsString("AUTHUSER_ID"); 
+string keyFingerprint = config:getAsString("KEYFINGERPRINT"); 
+string pathToKey = config:getAsString("PATHTOKEY"); 
+string keyStorePassword = config:getAsString("KEYSTOREPASSWORD"); 
+string keyAlias = config:getAsString("KEYALIAS"); 
+string keyPassword = config:getAsString("KEYPASSWORD"); 
+json chunking = "{ chunking: http:CHUNKING_NEVER}";
+
+# OCI Client endpoint
+objectstorage: OciConfiguration ociConfig = {
+    host: host,
+    tenancyId: tenancyId,
+    authUserId: authUserId,
+    keyFingerprint: keyFingerprint,
+    pathToKey: pathToKey,
+    keyStorePassword: keyStorePassword,
+    keyAlias: keyAlias,
+    keyPassword: keyPassword
 };
-   
+
 objectstorage:Client ociClient = new(ociConfig);
 
+http:ClientHttp1Settings chunk = {
+    chunking: "NEVER"
+};  
+
 public function main() {
-
     ociClient->getObjectStorageBucket(<compartmentId>, <tenancy>, <bucketName>);
-
 }
 ```
+
 
 #### Before you Begin
 
@@ -102,7 +118,7 @@ Refer [Oracle Documentation](https://docs.cloud.oracle.com/iaas/Content/API/Conc
 ```openssl pkcs12 -export -nocerts -inkey ~/.oci/<KEY_NAME>.pem -in ~/.oci/<KEY_NAME>.pem -out ~/.oci/<KEY_NAME_P12>.p12 -name "<KEY_ALIAS>"```
 
 # Ballerina Configuration File
-Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate values. Below is an example.
+Create or update `ballerina.conf` file in your project with following configurations and provide appropriate values. Below is an example.
 
     ```
     HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)

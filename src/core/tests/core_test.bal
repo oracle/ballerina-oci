@@ -462,7 +462,7 @@ function testUpdateRouteTable() {
 function testListServiceGateways() {
     io:println("ociClient -> listServiceGateways()");
     map<string> queries = {
-        "compartmentId" : "ocid1.compartment.oc1..aaaaaaaaom5hbg7e3ozfd2z54guiaouexv5swrjyioru3xxgaaufs6jhhzpq"
+        "compartmentId" : compartmentId
     };
     boolean exists = false;
     OciServiceGateway[] sGateways = ociClient->listServiceGateways(queries);

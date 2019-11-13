@@ -79,37 +79,42 @@ Add the below dependency in your Ballerina.toml file.
 
 ```
 [dependencies]
-"oracle/core" = { path = "https://github.com/oracle/ballerina-oci/blob/master/target/balo/core-2019r3-any-0.1.0.balo", version = "0.1.0"}
+"oracle/core" = { path = "path-to-core.balo", version = "0.1.0"}
 ```
 
 You can use the `oracle/core` module to integrate with Oracle Core Services. Import the `oracle/core` module into the Ballerina project.
 
 ```ballerina
 import ballerina/io;
+import ballerina/config;
 import oracle/core;
 
-core:OciConfiguration ociConfig = {
-    host: "",
-    tenancyId: "",
-    authUserId: "",
-    keyFingerprint: "",
-    pathToKey: "",
-    keyStorePassword: "",
-    keyAlias: "",
-    keyPassword: ""
+string host = config:getAsString("HOST_CORE");
+string tenancyId = config:getAsString("TENANCY_ID"); 
+string authUserId= config:getAsString("AUTHUSER_ID"); 
+string keyFingerprint = config:getAsString("KEYFINGERPRINT"); 
+string pathToKey = config:getAsString("PATHTOKEY"); 
+string keyStorePassword = config:getAsString("KEYSTOREPASSWORD"); 
+string keyAlias = config:getAsString("KEYALIAS"); 
+string keyPassword = config:getAsString("KEYPASSWORD"); 
+
+# OCI Client endpoint
+core: OciConfiguration ociConfig = {
+    host: host,
+    tenancyId: tenancyId,
+    authUserId: authUserId,
+    keyFingerprint: keyFingerprint,
+    pathToKey: pathToKey,
+    keyStorePassword: keyStorePassword,
+    keyAlias: keyAlias,
+    keyPassword: keyPassword
 };
    
 core:Client ociClient = new(ociConfig);
 
 public function main() {
-
-    var instanceResponse = ociClient->getInstance(<instance OCID>);
-    if (instanceResponse is core:OciInstance) {
-        io:println("Instance display name: ", instanceResponse.displayName);
-    } else {
-        io:println("Error: ", instanceResponse);
-    }
-    
+    var instanceResponse = ociClient->getInstance(<Instance OCID>);
+    io:println("Instance display name: ", instanceResponse.displayName);
 }
 ```
 
@@ -137,7 +142,7 @@ Refer [Oracle Documentation](https://docs.cloud.oracle.com/iaas/Content/API/Conc
 ```openssl pkcs12 -export -nocerts -inkey ~/.oci/<KEY_NAME>.pem -in ~/.oci/<KEY_NAME>.pem -out ~/.oci/<KEY_NAME_P12>.p12 -name "<KEY_ALIAS>"```
 
 # Ballerina Configuration File
-Create or update `ballerina.conf` file in `ballerina-oci` with following configurations and provide appropriate values. Below is an example.
+Create or update `ballerina.conf` file in your project with following configurations and provide appropriate values. Below is an example.
 
     ```
     HOST_CORE = "iaas.us-ashburn-1.oraclecloud.com" (region of the tenancy in which you are working)

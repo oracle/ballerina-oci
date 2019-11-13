@@ -47,8 +47,8 @@ OciConfiguration ociConfig = {
 Client ociClient = new(ociConfig);
 
 http:ClientHttp1Settings chunk = {
-        chunking: "NEVER"
-    };  
+    chunking: "NEVER"
+};  
 
 # Terminal command to test:
 # ballerina test --config ballerina.conf --groups compartments-<GROUPS>
