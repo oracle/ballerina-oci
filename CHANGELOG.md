@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 
 ## 0.1.0 - 2019-11-05 Initial Release
 
+The initial release was contributed by Pranav Sriram (pranavsriram8), Piyush Mohta (piyushmohta), 
+Sherman Lee (Sherman-Lee), Jadd Jennings (jaddjennings), Edward Wang (edwardWang95), Kranthi Manchikanti (ogkranthi), Dhvani Sheth (shethdhvani).
+
 Support for Ballerina 1.0.1
 
 ### Added
