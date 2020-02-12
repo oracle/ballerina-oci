@@ -186,7 +186,7 @@ public remote function listObjectStorageBuckets(string compartmentId, string ten
 # + bucketName - bucket name
 # + objectName - object name
 # + path - path
-# + return - int or error
+# + return - int or error (tainted)
 # Create object storage object
 # https://docs.cloud.oracle.com/iaas/api/#/en/objectstorage/20160918/Object/PutObject
 public remote function createObjectStorageObject(string tenancy, string bucketName, string objectName, string path) returns @tainted int|error? {
@@ -230,7 +230,7 @@ public remote function createObjectStorageObject(string tenancy, string bucketNa
 # + bucketName - bucket name
 # + objectName - object name
 # + fileName - file name
-# + return - error
+# + return - error (tainted)
 # Get object storage object
 # https://docs.cloud.oracle.com/iaas/api/#/en/objectstorage/20160918/Object/GetObject
 public remote function getObjectStorageObject(string tenancy, string bucketName, string objectName, string fileName) returns @tainted error?{
