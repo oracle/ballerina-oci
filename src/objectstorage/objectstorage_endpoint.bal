@@ -189,7 +189,7 @@ public remote function listObjectStorageBuckets(string compartmentId, string ten
 # + return - int or error
 # Create object storage object
 # https://docs.cloud.oracle.com/iaas/api/#/en/objectstorage/20160918/Object/PutObject
-public remote function createObjectStorageObject(string tenancy, string bucketName, string objectName, string path) returns int|error? {
+public remote function createObjectStorageObject(string tenancy, string bucketName, string objectName, string path) returns @tainted int|error? {
     io:ReadableByteChannel getNumOfBytes; 
     getNumOfBytes = check io:openReadableFile(path + "/" + objectName);
 
@@ -233,7 +233,7 @@ public remote function createObjectStorageObject(string tenancy, string bucketNa
 # + return - error
 # Get object storage object
 # https://docs.cloud.oracle.com/iaas/api/#/en/objectstorage/20160918/Object/GetObject
-public remote function getObjectStorageObject(string tenancy, string bucketName, string objectName, string fileName) returns error?{
+public remote function getObjectStorageObject(string tenancy, string bucketName, string objectName, string fileName) returns @tainted error?{
     http:Request request = new;
     string httpMethod = GET;
     string reqTarget = httpMethod + " /n/" + tenancy + "/b/" + bucketName + "/o/" + objectName;
