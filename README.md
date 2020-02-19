@@ -15,7 +15,7 @@ The Oracle OCI connector allows you to access the Oracle OCI REST APIs through b
 <tbody>
 	<tr>
 		<td>Ballerina Language</td>
-		<td>1.0.1 </td>
+		<td>1.1.0</td>
 	</tr>
 	<tr>
 		<td>Oracle Core Services API</td>
