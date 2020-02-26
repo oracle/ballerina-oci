@@ -1,4 +1,4 @@
-# Ballerina Oracle OCI Connector
+# Ballerina Oracle Cloud Infrastructure (OCI) Connector
 
 The Oracle OCI connector allows you to access the Oracle OCI REST APIs through ballerina. This project is open source and maintained by Oracle Corp.
 
